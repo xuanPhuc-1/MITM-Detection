@@ -14,6 +14,8 @@ do
     ethsrc=$(awk -F "," '{split($12,e,"="); print e[2]","}' data/flowentries.csv)   #10 cho l2
     ethdst=$(awk -F "," '{split($13,f,"="); print f[2]","}' data/flowentries.csv)   #11 cho l2
 
+    eth_src_reply=$(awk -F "," '{split($12,e,"="); print e[2]","}' ARP_data/ARP_Reply_flowentries.csv)   #10 cho l2
+    ip_dst_reply=$(awk -F "," '{split($15,d,"="); print d[2]","}' ARP_data/ARP_Reply_flowentries.csv)    #15 cho l3
     
     # ipsrc=$(awk -F "," '{out=""; for(k=2;k<=NF;k++){out=out" "$k}; print out}' data/flowentries.csv | awk -F " " '{split($15,d,"="); print d[2]","}')
     # ipdst=$(awk -F "," '{out=""; for(k=2;k<=NF;k++){out=out" "$k}; print out}' data/flowentries.csv | awk -F " " '{split($16,d,"="); print d[2]","}')
@@ -27,6 +29,8 @@ do
         echo "$ipdst" > data/ipdst.csv
         echo "$ethsrc" > data/ethsrc.csv
         echo "$ethdst" > data/ethdst.csv
+        echo "$eth_src_reply" > ARP_data/eth_src_reply.csv
+        echo "$ip_dst_reply" > ARP_data/ip_dst_reply.csv
     fi
 
 
