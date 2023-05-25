@@ -1,0 +1,1 @@
+ cookie=0x0, duration=8.203s, table=0, n_packets=1, n_bytes=42, idle_timeout=10, hard_timeout=30, reset_counts priority=65535,arp,in_port=1,vlan_tci=0x0000/0x1fff,dl_src=aa:06:64:62:0d:8b,dl_dst=62:64:ce:ca:ed:36,arp_spa=10.0.0.3,arp_tpa=10.0.0.7,arp_op=2 actions=output:2
