@@ -5,8 +5,8 @@ do
     # extract essential data from raw data
     sudo ovs-ofctl -O OpenFlow13 dump-flows s1 > data/raw.txt
     grep "nw_src" data/raw.txt > data/flowentries.csv
-    grep "arp_op=1" data/raw.txt >> ARP_data/ARP_Request_flowentries.csv
-    grep "arp_op=2" data/raw.txt >> ARP_data/ARP_Reply_flowentries.csv
+    grep "arp_op=1" data/raw.txt > ARP_data/ARP_Request_flowentries.csv
+    grep "arp_op=2" data/raw.txt > ARP_data/ARP_Reply_flowentries.csv
     #packets=$(awk -F "," '{split($4,a,"="); print a[2]","}' data/flowentries.csv) 
     #bytes=$(awk -F "," '{split($5,b,"="); print b[2]","}' data/flowentries.csv)
     ipsrc=$(awk -F "," '{split($14,c,"="); print c[2]","}' data/flowentries.csv)    #14 cho l3
@@ -16,11 +16,8 @@ do
 
     eth_src_reply=$(awk -F "," '{split($12,e,"="); print e[2]","}' ARP_data/ARP_Reply_flowentries.csv)   #10 cho l2
     ip_dst_reply=$(awk -F "," '{split($15,d,"="); print d[2]","}' ARP_data/ARP_Reply_flowentries.csv)    #15 cho l3
-    
-    # ipsrc=$(awk -F "," '{out=""; for(k=2;k<=NF;k++){out=out" "$k}; print out}' data/flowentries.csv | awk -F " " '{split($15,d,"="); print d[2]","}')
-    # ipdst=$(awk -F "," '{out=""; for(k=2;k<=NF;k++){out=out" "$k}; print out}' data/flowentries.csv | awk -F " " '{split($16,d,"="); print d[2]","}')
-    # inport=$(awk -F "," '{out=""; for(k=2;k<=NF;k++){out=out" "$k}; print out}' data/flowentries.csv | awk -F " " '{split($10,d,"="); print d[2]","}')
-    # check if there are no traffics in the network at the moment.
+
+
     if test -z "$ipsrc" || test -z "$ipdst" || test -z "$ethsrc" || test -z "$ethdst";
     then
         state=0
@@ -32,9 +29,9 @@ do
         echo "$eth_src_reply" > ARP_data/eth_src_reply.csv
         echo "$ip_dst_reply" > ARP_data/ip_dst_reply.csv
     fi
+    python3.8 computeTuples.py
 
-
-    sleep 3
+    sleep 5
 done
 
 
