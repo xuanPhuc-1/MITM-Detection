@@ -68,6 +68,7 @@ def main(argv):
 
 	    #rstrip() strips whitespace characters from the end of interface
         sendp(packets, iface = interface.rstrip(), inter = 0.1)
+        
 
 if __name__ == '__main__': # 3000 packets normal
   main(sys.argv)
