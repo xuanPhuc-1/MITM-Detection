@@ -29,8 +29,8 @@ do
         echo "$ip_dst_reply" > ARP_data/ip_dst_reply.csv
     fi
     python3.8 computeTuples.py
-    sudo rm ARP_Broadcast/arp_broadcast.csv
-    sleep 5
+    truncate -s 0 ARP_Broadcast/arp_broadcast.csv
+    sleep 3
 done
 
 

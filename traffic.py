@@ -12,7 +12,7 @@ import random
 def payload_generator(size, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
-def generateSourceIP(start, end):
+def generateSourceIP(start):
     #not valid for first octet of IP address
     #not_valid = [10, 127, 254, 1, 2, 169, 172, 192]
 
@@ -24,18 +24,18 @@ def generateSourceIP(start, end):
     
     #eg, ip = "100.200.10.1"
     #ip = ".".join([str(first), str(randrange(1,256)), str(randrange(1,256)), str(randrange(1,256))])
-    ip = ".".join([str(10), str(0), str(0), str(randrange(start,end))])
+    ip = ".".join([str(10), str(0), str(0), str(start)])
 
     return ip
 
 #start, end: given as command line arguments. eg, python traffic.py -s 2 -e 65  
-def generateDestinationIP(start, end):
+def generateDestinationIP(end):
     first = 10
     second = 0
     third = 0
 
     #eg, ip = "10.0.0.64"
-    ip = ".".join([str(first), str(second), str(third), str(randrange(start,end))])
+    ip = ".".join([str(first), str(second), str(third), str(randrange(1,end))])
 
     return ip
 
@@ -63,7 +63,7 @@ def main(argv):
     interface = popen('ifconfig | awk \'/eth0/ {print $1}\'').read()
 
     for i in range(100000):
-        packets = Ether() / IP(dst = generateDestinationIP (start, end), src = generateSourceIP (start, end)) / UDP(dport = 80, sport = 2)/payload_generator(size=randrange(1,50))
+        packets = Ether() / IP(dst = generateDestinationIP (end), src = generateSourceIP (start)) / UDP(dport = 80, sport = 2)/payload_generator(size=randrange(1,50))
         print(repr(packets))
 
 	    #rstrip() strips whitespace characters from the end of interface
@@ -72,7 +72,5 @@ def main(argv):
 
 if __name__ == '__main__': # 3000 packets normal
   main(sys.argv)
-#   for i in range (1, 3):
-#       main(sys.argv[0], sys.argv[1])
-#       #time.sleep ()
+
 
