@@ -87,6 +87,7 @@ def myNetwork():
     
     info( '*** Post configure switches and hosts\n')
     p1 = Process(target=net.get('h1').cmd, args=('python3.8 traffic.py -s 1 -e 16',))
+    #p1 = Process(target=net.get('h1').cmd, args=('ettercap -T -i h1-eth0 -M ARP /10.0.0.3// /10.0.0.7//',))
     p1.start()
     
     p2 = Process(target=net.get('h2').cmd, args=('python3.8 traffic.py -s 2 -e 16',))

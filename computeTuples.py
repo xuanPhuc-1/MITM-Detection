@@ -19,6 +19,15 @@ with open('/home/xuanphuc/MITM-Detection/ARP_Broadcast/arp_broadcast.csv', newli
     #format of arp_broadcast.csv: source Mac, time stamp
     arp_broadcast = list(reader)
 
+
+with open('f1.csv', 'r') as csvfile:
+    reader = csv.reader(csvfile, delimiter=',')
+    reader = list(reader)
+    
+if int(reader[-1][-1]) > 0:
+    miss_match = 1
+else:
+    miss_match = 0
 arp_broadcast = len(arp_broadcast)
 abps = arp_broadcast / time_interval
 
@@ -33,21 +42,26 @@ aps = ARP / time_interval
 subARP = ARP_Reply - ARP_Request         
 #time stamp with minute:second format
 time_stamp = time.strftime("%M:%S", time.localtime())
-headers = ["APS", "ABPS", "SUBARP", "time_stamp"]
+headers = ["APS", "ABPS", "SUBARP","MISS_MAC"]
 
-features = [aps, abps, subARP, time_stamp]
+features = [aps, abps, subARP, miss_match]
 
 # print(dict(zip(headers, features)))
 # print(features)
 
-with open('features-file.csv', 'a') as f:
-    cursor = csv.writer(f, delimiter=",")
-    cursor.writerow(features)
+# with open('features-file.csv', 'a') as f:      #comment de test model
+#     cursor = csv.writer(f, delimiter=",")
+#     cursor.writerow(features)
 
 
 with open('realtime.csv', 'w') as f:
     cursor = csv.writer(f, delimiter=",")
     cursor.writerow(headers)
     cursor.writerow(features)
-    
     f.close()
+    
+# with open('dataset.csv', 'a') as f:            #comment de test model
+#     cursor = csv.writer(f, delimiter=",")
+#     cursor.writerow(headers)
+#     cursor.writerow(features)
+#     f.close()
