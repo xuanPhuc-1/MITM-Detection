@@ -42,16 +42,16 @@ aps = ARP / time_interval
 subARP = ARP_Reply - ARP_Request         
 #time stamp with minute:second format
 time_stamp = time.strftime("%M:%S", time.localtime())
-headers = ["APS", "ABPS", "SUBARP","MISS_MAC"]
+headers = ["APS", "ABPS", "SUBARP","MISS_MAC", "CLASS"]
 
-features = [aps, abps, subARP, miss_match]
+features = [aps, abps, subARP, miss_match, 1]
 
 # print(dict(zip(headers, features)))
 # print(features)
 
-# with open('features-file.csv', 'a') as f:      #comment de test model
-#     cursor = csv.writer(f, delimiter=",")
-#     cursor.writerow(features)
+with open('features-file.csv', 'a') as f:      #comment de test model
+    cursor = csv.writer(f, delimiter=",")
+    cursor.writerow(features)
 
 
 with open('realtime.csv', 'w') as f:
