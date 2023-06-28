@@ -90,11 +90,12 @@ def myNetwork():
     #p1 = Process(target=net.get('h1').cmd, args=('ettercap -T -i h1-eth0 -M ARP /10.0.0.3// /10.0.0.7//',))
     p1.start()
     
-    #p2 = Process(target=net.get('h2').cmd, args=('python3.8 traffic.py -s 2 -e 16',))
-    p2 = Process(target=net.get('h2').cmd, args=('ettercap -T -i h2-eth0 -M ARP /10.0.0.5// /10.0.0.8//',))
+    p2 = Process(target=net.get('h2').cmd, args=('python3.8 traffic.py -s 2 -e 16',))
+    #p2 = Process(target=net.get('h2').cmd, args=('ettercap -T -i h2-eth0 -M ARP /10.0.0.5// /10.0.0.8//',))
     p2.start()
     
-    p3 = Process(target=net.get('h3').cmd, args=('python3.8 traffic.py -s 3 -e 16',))
+    #p3 = Process(target=net.get('h3').cmd, args=('python3.8 traffic.py -s 3 -e 16',))
+    p3= Process(target=net.get('h3').cmd, args=('ettercap -T -i h3-eth0 -M ARP /10.0.0.1// /10.0.0.8//',))
     p3.start()
     
     p4 = Process(target=net.get('h4').cmd, args=('python3.8 traffic.py -s 4 -e 16',))
