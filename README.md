@@ -1,15 +1,15 @@
-# MITM-Detection
+### MITM-Detection
 # Test Traffic
-# Step 1: run file l2_learning_mod.py on /pox/pox/forwarding
+### Step 1: run file l2_learning_mod.py on /pox/pox/forwarding
 python3.8 pox.py forwarding.l2_learning_new
-# Step 2: Collect data
+### Step 2: Collect data
 source collect.sh
-# Step 3: Run controller (The traffic will generate automatically)
+### Step 3: Run controller (The traffic will generate automatically)
 sudo python3 ./custom_topo.py 
 
 
 
-# add line
+### add line
 
 arp_request_count = 0
 arp_reply_count = 0
