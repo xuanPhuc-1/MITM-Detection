@@ -3,9 +3,7 @@ import csv
 plt.clf()
 #visualize the graph with x-axis is time_stamp and y-axis is APS
 # create x list contain from 0 to 72 seconds with 3 second interval
-x = []
-for i in range(0, 72, 3):
-    x.append(i)
+
 y1 = []
 y2 = []
 y3 = []
@@ -19,41 +17,55 @@ with open('evaluation.csv', 'r') as csvfile:
         y3.append(float(row[2]))
         y4.append(float(row[3]))
 
+number_of_samples = len(y1)
+x = []
+
+#use for loop to create x list, each sample has 3 second interval
+for i in range(0, number_of_samples):
+    x.append(i*3)
+    
 
 #plot the graph with 4 subplots
 
-plt.subplot(2, 2, 1)
-plt.plot(x, y1, marker='o')
-plt.title('APS')
-plt.xlabel('Time')
-plt.text(30, 30, "Normal", fontsize=12, color='green')
-plt.text(45, 30, "Attack", fontsize=12, color='red')
 
-plt.subplot(2, 2, 2)
-plt.plot(x, y2, marker='o')
-plt.title('ABPS')
-plt.xlabel('Time')
-plt.text(30, 1.5, "Normal", fontsize=12, color='green')
-plt.text(45, 1.5, "Attack", fontsize=12, color='red')
+# plt.plot(x, y1, marker='o')
+# plt.title('ARP Packets per Second')
+# plt.xlabel('Time')
+# plt.ylabel('Value')
+# # plt.text(30, 30, "Normal", fontsize=12, color='green')
+# # plt.text(45, 30, "Attack", fontsize=12, color='red')
+# plt.show()
 
-plt.subplot(2, 2, 3)
-plt.plot(x, y3, marker='o')
-plt.title('SUBARP')
-plt.xlabel('Time')
-plt.text(25, 0.5, "Normal", fontsize=12, color='green')
-plt.text(42, 0.5, "Attack", fontsize=12, color='red')
+# # plt.subplot(2, 2, 2)
+# plt.plot(x, y2, marker='o')
+# plt.title('ARP Broadcast Packets per Second')
+# plt.xlabel('Time')
+# plt.ylabel('Value')
+# # plt.text(30, 1.5, "Normal", fontsize=12, color='green')
+# # plt.text(45, 1.5, "Attack", fontsize=12, color='red')
+# plt.show()
 
-plt.subplot(2, 2, 4)
+# #plt.subplot(2, 2, 3)
+# plt.plot(x, y3, marker='o')
+# plt.title('Subtraction of ARP request and ARP reply')
+# plt.xlabel('Time')
+# plt.ylabel('Value')
+# # plt.text(25, 0.5, "Normal", fontsize=12, color='green')
+# # plt.text(42, 0.5, "Attack", fontsize=12, color='red')
+# plt.show()
+
+#plt.subplot(2, 2, 4)
 plt.plot(x, y4, marker='o')
-plt.title('MISS_MAC')
+plt.title('Missing MAC and IP address')
 plt.xlabel('Time')
-plt.text(30, 0.5, "Normal", fontsize=12, color='green')
-plt.text(42, 0.5, "Attack", fontsize=12, color='red')
+plt.ylabel('Value')
+# plt.text(30, 0.5, "Normal", fontsize=12, color='green')
+# plt.text(42, 0.5, "Attack", fontsize=12, color='red')
 plt.show()
 
         
         
-#clear all plt figure
+# #clear all plt figure
 
 
 
