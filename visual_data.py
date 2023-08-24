@@ -53,14 +53,26 @@ for i in range(0, number_of_samples):
 # # plt.text(25, 0.5, "Normal", fontsize=12, color='green')
 # # plt.text(42, 0.5, "Attack", fontsize=12, color='red')
 # plt.show()
+#set the font-family is Times New Roman
 
+plt.rcParams["font.family"] = "Times New Roman"
 #plt.subplot(2, 2, 4)
-plt.plot(x, y4, marker='o')
-plt.title('Missing MAC and IP address')
-plt.xlabel('Time')
-plt.ylabel('Value')
-# plt.text(30, 0.5, "Normal", fontsize=12, color='green')
-# plt.text(42, 0.5, "Attack", fontsize=12, color='red')
+# plt.plot(x, y4, marker='o')
+# #set the title font-family is Times New Roman
+
+# plt.title('Miss-Match IP and MAC address', size=35, **csfont)
+# plt.xticks(fontsize=30)
+# plt.yticks(fontsize=30)
+# plt.xlabel('Time', size=35)
+# # increase xlabel size
+# plt.ylabel('Value', size=35)
+# # plt.text(30, 0.5, "Normal", fontsize=12, color='green')
+# # plt.text(42, 0.5, "Attack", fontsize=12, color='red')
+# # increase the font size and the number size on the axis
+
+# plt.show()
+plt.title('title')
+plt.xlabel('xlabel')
 plt.show()
 
         

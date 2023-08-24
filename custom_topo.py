@@ -23,7 +23,11 @@ def myNetwork():
                       ip='127.0.0.1',
                       protocol='tcp',
                       port=6633)
-
+    # c1=net.addController(name='c1',
+    #                   controller=RemoteController,
+    #                   ip='127.0.0.1',
+    #                   protocol='tcp',
+    #                   port=6634)
     info( '*** Add switches\n')
     s2 = net.addSwitch('s2', cls=OVSKernelSwitch)
     s3 = net.addSwitch('s3', cls=OVSKernelSwitch)
@@ -83,6 +87,12 @@ def myNetwork():
     net.get('s4').start([c0])
     net.get('s1').start([c0])
     net.get('s5').start([c0])
+    
+    # net.get('s2').start([c1])
+    # net.get('s3').start([c1])
+    # net.get('s4').start([c1])
+    # net.get('s1').start([c1])
+    # net.get('s5').start([c1])
     #let the host run command in the background
     
     info( '*** Post configure switches and hosts\n')

@@ -3,8 +3,8 @@ for i in {1..2000}
 do
     echo "Collecting data turn $i"
     # extract essential data from raw data
-    sudo ovs-ofctl -O OpenFlow13 dump-flows s1 > data/raw.txt
-    # sudo ovs-ofctl dump-flows tcp:10.0.1.1:6633 > data/raw.txt
+    sudo ovs-ofctl -O OpenFlow10 dump-flows s1 > data/raw.txt
+    #sudo ovs-ofctl dump-flows tcp:10.0.1.1:6633 > data/raw.txt
     grep "nw_src" data/raw.txt > data/flowentries.csv
     grep "arp_op=1" data/raw.txt > ARP_data/ARP_Request_flowentries.csv
     grep "arp_op=2" data/raw.txt > ARP_data/ARP_Reply_flowentries.csv
@@ -29,8 +29,8 @@ do
         echo "$eth_src_reply" > ARP_data/eth_src_reply.csv
         echo "$ip_dst_reply" > ARP_data/ip_dst_reply.csv
     fi
-    python3.8 computeTuples.py
-    truncate -s 0 ARP_Broadcast/arp_broadcast.csv
+    python3.8 computeRealTime.py
+    #truncate -s 0 ARP_Broadcast/arp_broadcast.csv
     #python3.8 inspector.py
     sleep 3
 done
