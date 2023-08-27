@@ -6,16 +6,12 @@ import time
 
 packets = []
 while True:
-    #packets = []    
-    #open file capture.csv
-    #wipe data in the file
-    #with open('capture.csv', 'w') as csvfile:
-        #csvfile.write('')
-    #capture packets
-    capture = pyshark.LiveCapture(interface='Loopback')
+
+    ABPS_count = 0
+    capture = pyshark.LiveCapture(interface='Wi-Fi')
 
 
-    #capture 100 packets
+    #capture 150 packets
     capture.sniff(packet_count=150)
 
     #store the packets in the array
@@ -23,8 +19,15 @@ while True:
         packets.append(packet)
     #Extract the the raw packet type from OpenFlow Packet_In in the Loopback interface
     for packet in packets:
-        if packet.highest_layer == 'OPENFLOW_V1':
-            print(packet.show())
+        #find the ARP packets sent broadcast from local host
+        if packet.highest_layer == 'ARP' and packet.arp.dst_hw_mac == '00:00:00:00:00:00' and packet.arp.src_hw_mac == 'b0:35:9f:62:7a:14':
+            ABPS_count += 1
+        with open('capture.csv', 'a') as csvfile:
+            csvfile.write(str(ABPS_count) + '\n') 
+    packets = []
+    time.sleep(1)
+            
+            
                 
     # #display the packets
     # for packet in packets:
