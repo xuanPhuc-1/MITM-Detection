@@ -1,76 +1,62 @@
-import sys
-import getopt
+import argparse
+import threading
 import time
-from os import popen
-import logging
-logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
-from scapy.all import sendp, IP, UDP, Ether, TCP
-from random import randrange
-import string
 import random
-
-def payload_generator(size, chars=string.ascii_uppercase + string.digits):
-    return ''.join(random.choice(chars) for _ in range(size))
-
-def generateSourceIP(start):
-    #not valid for first octet of IP address
-    #not_valid = [10, 127, 254, 1, 2, 169, 172, 192]
-
-    #selects a random number in the range [1,256)
-    #first = randrange(1, 256)
-
-    #while first in not_valid:
-    #    first = randrange(1, 256)
-    
-    #eg, ip = "100.200.10.1"
-    #ip = ".".join([str(first), str(randrange(1,256)), str(randrange(1,256)), str(randrange(1,256))])
-    ip = ".".join([str(10), str(0), str(0), str(start)])
-
-    return ip
-
-#start, end: given as command line arguments. eg, python traffic.py -s 2 -e 65  
-def generateDestinationIP(end):
-    first = 10
-    second = 0
-    third = 0
-
-    #eg, ip = "10.0.0.64"
-    ip = ".".join([str(first), str(second), str(third), str(randrange(1,end))])
-
-    return ip
-
-def main(argv):
-    #print argv
-    
-    #getopt.getopt() parses command line arguments and options 
-    try:
-        opts, args = getopt.getopt(sys.argv[1:], 's:e:', ['start=','end='])
-    except getopt.GetoptError:
-        sys.exit(2)
-
-    for opt, arg in opts:
-        if opt =='-s':
-            start = int(arg)
-        elif opt =='-e':
-            end = int(arg)
-
-    if start == '':
-        sys.exit()
-    if end == '':
-        sys.exit()
-    
-    #open interface eth0 to send packets
-    interface = popen('ifconfig | awk \'/eth0/ {print $1}\'').read()
-
-    for i in range(100000):
-        packets = Ether() / IP(dst = generateDestinationIP (end), src = generateSourceIP (start)) / UDP(dport = 80, sport = 2)/payload_generator(size=randrange(1,50))
-        print(repr(packets))
-
-	    #rstrip() strips whitespace characters from the end of interface
-        sendp(packets, iface = interface.rstrip(), inter = 0.1)
-        
-
-if __name__ == '__main__': # 3000 packets normal
-  main(sys.argv)
+import socket
 
 
+def send_ping(host):
+    while True:
+        # Simulate random ping intervals
+        time.sleep(random.randint(1, 60))
+
+        # Create a socket object
+        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+        # Send a ping request to the specified host
+        try:
+            sock.sendto(b"PING", (host, 80))
+            print(f"Sent ping to {host}")
+        except socket.error as e:
+            print(f"Error sending ping to {host}: {e}")
+
+        # Receive a response from the host
+        try:
+            data, addr = sock.recvfrom(1024)
+        except socket.error:
+            print(f"No response from {host}")
+        else:
+            print(f"Received ping response from {addr}: {data}")
+
+        # Close the socket
+        sock.close()
+
+
+def main():
+    # Parse command-line arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-s", "--start", type=int,
+                        default=1, help="Starting host index")
+    parser.add_argument("-e", "--end", type=int,
+                        default=16, help="Ending host index")
+    args = parser.parse_args()
+
+    # Get the list of hosts based on the specified range
+    hosts = []
+    for i in range(args.start, args.end + 1):
+        hosts.append(f"10.0.0.{i}")
+
+    while True:
+        # Create and start threads for each host
+        threads = []
+        for host in hosts:
+            thread = threading.Thread(target=send_ping, args=(host,))
+            threads.append(thread)
+            thread.start()
+
+        # Sleep for a while before restarting the pinging process
+        time.sleep(60)
+
+
+if __name__ == "__main__":
+    main()
