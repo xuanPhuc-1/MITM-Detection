@@ -43,10 +43,10 @@ subARP = ARP_Reply - ARP_Request
 # time stamp with minute:second format
 time_stamp = time.strftime("%H:%M:%S", time.localtime())
 # APS: ARP per second, ABPS: ARP broadcast per second, SUBARP: ARP reply - ARP request, MISS_MAC: miss match
-headers = ["APS", "ABPS", "SUBARP", "MISS_MAC", "TIME"]
+headers = ["APS", "ABPS", "SUBARP", "MISS_MAC", "CLASS"]
 
 
-features = [aps, abps, subARP, miss_match, time_stamp]
+features_value = [aps, abps, subARP, miss_match, 0]
 
 # print(dict(zip(headers, features)))
 # print(features)
@@ -55,15 +55,15 @@ features = [aps, abps, subARP, miss_match, time_stamp]
 #     cursor = csv.writer(f, delimiter=",")
 #     cursor.writerow(features)
 
-with open('evaluation.csv', 'a') as f:  # comment de test model
+with open('normal.csv', 'a') as f:  # comment de test model
     cursor = csv.writer(f, delimiter=",")
-    cursor.writerow(features)
+    cursor.writerow(features_value)
 
-with open('realtime.csv', 'w') as f:
-    cursor = csv.writer(f, delimiter=",")
-    cursor.writerow(headers)
-    cursor.writerow(features)
-    f.close()
+# with open('realtime.csv', 'w') as f:
+#     cursor = csv.writer(f, delimiter=",")
+#     cursor.writerow(headers)
+#     cursor.writerow(features)
+#     f.close()
 
 # with open('dataset.csv', 'a') as f:            #comment de test model
 #     cursor = csv.writer(f, delimiter=",")
