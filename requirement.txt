@@ -49,3 +49,5 @@ tzdata              2023.3
 wcwidth             0.2.10
 wheel               0.41.2
 zipp                3.17.0
+tensorflow          2.7.0
+scikit-learn        1.0.1
