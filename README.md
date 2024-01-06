@@ -44,7 +44,7 @@ time_interval=1.0
 mismatch_mac_ip_count=0
 ```
 
-### Step 1: run file l2_learning_mod.py on /pox/pox/forwarding
+### Step 1: run file l2_learning_mod.py on /pox/pox/forwarding/
 
 ```bash
 python3.8 pox.py forwarding.l2_learning_new
