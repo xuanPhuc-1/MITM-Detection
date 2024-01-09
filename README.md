@@ -5,7 +5,7 @@
 ## Run on Ubuntu 20.04:
 ### Step 1: Install python3.8
 ```bash
-sudo install -r requirements.txt
+sudo pip install -r requirements.txt
 ```
 
 ### Step 2: Install mininet
@@ -69,11 +69,11 @@ source collect.sh
 ### Step 3: Run controller (The traffic will generate automatically)
 
 ```bash
-    sudo python3.8 ./custom_topo.py
+sudo python3.8 ./custom_topo.py
 ```
 
 ### attack example h1 (attacker) -> h3, h7 (victim)
 
 ```bash
-    ettercap -T -i h1-eth0 -M ARP /10.0.0.3// /10.0.0.7//
+ettercap -T -i h1-eth0 -M ARP /10.0.0.3// /10.0.0.7//
 ```
