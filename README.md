@@ -2,10 +2,20 @@
 
 # Installation
 
-## Run on Ubuntu 18.04:
-
+## Run on Ubuntu 20.04:
+### Step 1: Install python3.8
 ```bash
-pip install -r requirements.txt
+sudo install -r requirements.txt
+```
+
+### Step 2: Install mininet
+```bash
+sudo apt install mininet
+```
+
+### Step 3: Install xterm
+```bash
+sudo apt install xterm
 ```
 
 ## Run on Fedora:
