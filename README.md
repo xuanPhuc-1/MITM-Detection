@@ -3,19 +3,36 @@
 # Installation
 
 ## Run on Ubuntu 20.04:
+
 ### Step 1: Install python3.8
+
 ```bash
 sudo pip install -r requirements.txt
 ```
 
 ### Step 2: Install mininet
+
 ```bash
 sudo apt install mininet
 ```
 
 ### Step 3: Install xterm
+
 ```bash
 sudo apt install xterm
+```
+
+## Command to run mininet
+
+```bash
+sudo -E mn --switch ovsk --topo tree,depth=2,fanout=8 --controller=remote,ip=127.0.0.1,port=6633
+```
+
+## Command to run controller
+
+```bash
+cd pox
+python3 pox.py forwarding.l3_learning
 ```
 
 ## Run on Fedora:
