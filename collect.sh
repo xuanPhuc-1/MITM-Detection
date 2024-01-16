@@ -34,5 +34,3 @@ do
     #python3.8 inspector.py
     sleep 3
 done
-
-
