@@ -46,4 +46,4 @@ def plot_data(filename):
 
 
 if __name__ == "__main__":
-    plot_data("evaluation.csv")
+    plot_data("test.csv")

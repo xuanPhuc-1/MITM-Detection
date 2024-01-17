@@ -2,7 +2,7 @@ import numpy as np
 import csv
 import pandas as pd
 import time
-time_interval = 3
+time_interval = 1
 
 
 with open('ARP_data/ARP_Reply_flowentries.csv', newline='') as f:
@@ -20,33 +20,38 @@ with open('/home/xp/MITM-Detection/ARP_Broadcast/arp_broadcast.csv', newline='')
     arp_broadcast = list(reader)
 
 
-with open('f1.csv', 'r') as csvfile:
-    reader = csv.reader(csvfile, delimiter=',')
-    reader = list(reader)
-
-if int(reader[-1][-1]) > 0:
-    miss_match = 1
-else:
-    miss_match = 0
 arp_broadcast = len(arp_broadcast)
 abps = arp_broadcast / time_interval
 
 # count the number of ARP_Request
 ARP_Request = len(ARP_Request)
 ARP = ARP_Reply + ARP_Request
+
 f.close()
 f1.close()
 f2.close()
 
 aps = ARP / time_interval
 subARP = ARP_Reply - ARP_Request
+
+with open('f1.csv', 'r') as csvfile:
+    reader = csv.reader(csvfile, delimiter=',')
+    reader = list(reader)
+
+if int(reader[-1][-1]) > 0:
+    if subARP >= 1:
+        miss_match = 1
+    else:
+        miss_match = 0
+else:
+    miss_match = 0
 # time stamp with minute:second format
 time_stamp = time.strftime("%H:%M:%S", time.localtime())
 # APS: ARP per second, ABPS: ARP broadcast per second, SUBARP: ARP reply - ARP request, MISS_MAC: miss match
 headers = ["APS", "ABPS", "SUBARP", "MISS_MAC", "CLASS"]
 
 
-features_value = [aps, abps, subARP, miss_match, 0]
+features_value = [aps, abps, subARP, miss_match, time_stamp]
 
 # print(dict(zip(headers, features)))
 # print(features)
@@ -55,7 +60,9 @@ features_value = [aps, abps, subARP, miss_match, 0]
 #     cursor = csv.writer(f, delimiter=",")
 #     cursor.writerow(features)
 
-with open('normal.csv', 'a') as f:  # comment de test model
+# write the header to the first row of the csv file
+
+with open('test.csv', 'a') as f:  # comment de test model
     cursor = csv.writer(f, delimiter=",")
     cursor.writerow(features_value)
 
