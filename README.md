@@ -35,6 +35,31 @@ cd pox
 python3 pox.py forwarding.l3_learning
 ```
 
+### Step 4: run file l2_learning_mod.py on /pox/pox/forwarding/
+
+```bash
+python3 pox.py forwarding.l2_learning_new
+```
+### Step 3: Run controller (The traffic will generate automatically)
+
+```bash
+sudo python3 ./custom_topo.py
+```
+
+### Step 5: Collect data
+
+```bash
+source collect.sh
+```
+
+
+### attack example h1 (attacker) -> h3, h7 (victim)
+
+```bash
+ettercap -T -i h1-eth0 -M ARP /10.0.0.3// /10.0.0.7//
+```
+
+
 ## Run on Fedora:
 
 ### Step 1: Install python3.8
