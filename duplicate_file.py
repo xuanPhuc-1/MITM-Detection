@@ -15,6 +15,6 @@ def duplicate_rows(input_file, output_file, num_duplicates):
 # Sử dụng hàm với các tham số tương ứng
 input_file_path = 'dataset-real.csv'
 output_file_path = 'dataset-real-duplicate.csv'
-num_duplicates = 5  
+num_duplicates = 4
 
 duplicate_rows(input_file_path, output_file_path, num_duplicates)

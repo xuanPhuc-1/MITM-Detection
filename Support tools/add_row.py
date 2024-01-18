@@ -11,9 +11,6 @@ output_file_path = 'dataset-real.csv'
 with open(output_file_path, mode='w', newline='') as file:
     writer = csv.writer(file)
 
-    # Ghi tiêu đề
-    writer.writerow(["aps", "abps", "subarp", "miss_mac", "class/"])
-
     # Ghi dữ liệu với giá trị ngẫu nhiên
     for _ in range(num_rows):
         aps = round(random.uniform(20.0, 30.0), 3)
