@@ -4,7 +4,7 @@ import matplotlib.dates as mdates
 
 
 def plot_data(filename):
-    aps = []
+    #aps = []
     abps = []
     subarp = []
     miss_mac = []
@@ -14,14 +14,14 @@ def plot_data(filename):
         lines = f.readlines()
         for line in lines:
             row = line.split(",")
-            aps.append(float(row[0]))
+            #aps.append(float(row[0]))
             abps.append(float(row[1]))
             subarp.append(int(row[2]))
             miss_mac.append(int(row[3]))
             time_obj = datetime.strptime(row[4].strip(), "%H:%M:%S")
             time.append(time_obj)
 
-    plt.plot(time, aps, label="APS")
+    #plt.plot(time, aps, label="APS")
     plt.plot(time, abps, label="ABPS")
     plt.plot(time, subarp, label="SUBARP")
     plt.plot(time, miss_mac, label="MISS_MAC")

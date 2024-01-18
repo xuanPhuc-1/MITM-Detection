@@ -11,12 +11,17 @@ import pox
 
 log = core.getLogger()
 
+#get HOME PATH 
+import os
+HOME = os.path.expanduser('~')
+log = core.getLogger()
+
 # We don't want to flood immediately when a switch connects.
 # Can be overriden on commandline.
 _flood_delay = 0
 #TODO change path here
-path = '/home/xuanphuc/MITM-Detection/ARP_Broadcast/arp_broadcast.csv'
-outfile = '/home/xuanphuc/MITM-Detection/f1.csv'
+path = HOME + '/MITM-Detection/ARP_Broadcast/arp_broadcast.csv'
+outfile = HOME+ '/MITM-Detection/f1.csv'
 class LearningSwitch (object):
 
   """
@@ -250,7 +255,6 @@ def launch (transparent=False, hold_down=_flood_delay, ignore = None):
 
   core.registerNew(l2_learning_new, str_to_bool(transparent), ignore)
   threading.Timer(pox.time_interval, compute_features).start()
-  threading.Timer(10, reset_mismatch_count).start()
 
 
 def compute_features():
@@ -269,8 +273,4 @@ def compute_features():
 
   pox.arp_request_previous_count = pox.arp_request_count
   pox.arp_reply_previous_count = pox.arp_reply_count
-  threading.Timer(pox.time_interval, compute_features).start()
-
-def reset_mismatch_count():
-  pox.mismatch_mac_ip_count = 0
-  threading.Timer(115, reset_mismatch_count).start()
+  threading.Timer(pox.time_interval, compute_features).start() 

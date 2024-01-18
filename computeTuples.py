@@ -2,6 +2,9 @@ import numpy as np
 import csv
 import pandas as pd
 import time
+import os
+
+HOME = os.path.expanduser('~')
 time_interval = 1
 
 
@@ -14,7 +17,9 @@ with open('ARP_data/ARP_Request_flowentries.csv', newline='') as f1:
     reader = csv.reader(f1)
     ARP_Request = list(reader)
 # #check if the path /home/xuanphuc/MITM-Detection/ARP_Broadcast/arp_broadcast.csv exists do the following or not the a
-with open('/home/xp/MITM-Detection/ARP_Broadcast/arp_broadcast.csv', newline='') as f2:
+    
+path = HOME + '/MITM-Detection/ARP_Broadcast/arp_broadcast.csv'
+with open(path, newline='') as f2:
     reader = csv.reader(f2)
     # format of arp_broadcast.csv: source Mac, time stamp
     arp_broadcast = list(reader)
