@@ -2,7 +2,7 @@ import csv
 import random
 
 # Số lượng dòng bạn muốn tạo
-num_rows = 2000
+num_rows = 1000
 
 # Đường dẫn đến file CSV
 output_file_path = 'dataset-real.csv'
@@ -19,6 +19,7 @@ with open(output_file_path, mode='w', newline='') as file:
         aps = round(random.uniform(20.0, 30.0), 3)
         abps = round(random.uniform(3.0, 4.0), 3)
         subarp = int(random.uniform(1, 4))
+        # miss_mac random 0 or 1
         miss_mac = 1
         class_value = 1
         writer.writerow([aps, abps, subarp, miss_mac, class_value])
