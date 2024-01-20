@@ -1,8 +1,13 @@
 import pandas as pd
 import joblib
 import warnings
-
-filename = 'MitM_nn'
+import skops.io as sio
+import pickle
+import os
+import numpy as np
+HOME = os.path.expanduser('~')
+modelName = 'ANN'
+filename = HOME + '/MITM-Detection/Models/' + modelName
 classifier = joblib.load(filename)
 dt_realtime = pd.read_csv('realtime.csv')
 result = classifier.predict(dt_realtime)

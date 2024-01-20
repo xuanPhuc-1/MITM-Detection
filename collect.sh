@@ -31,6 +31,6 @@ do
     fi
     python3.8 computeTuples.py
     truncate -s 0 ARP_Broadcast/arp_broadcast.csv
-    #python3.8 inspector.py
+    python3.8 inspector.py
     sleep 1
 done
