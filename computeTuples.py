@@ -39,7 +39,7 @@ f2.close()
 aps = ARP / time_interval
 subARP = ARP_Reply - ARP_Request
 
-with open('f1.csv', 'r') as csvfile:
+with open('mismatch.csv', 'r') as csvfile:
     reader = csv.reader(csvfile, delimiter=',')
     reader = list(reader)
 
@@ -58,7 +58,7 @@ headers = ["APS", "ABPS", "SUBARP", "MISS_MAC"]
 
 # features_value = [aps, abps, subARP, miss_match, time_stamp]
 
-features_value = [aps, abps, subARP, miss_match]
+features_value = [aps, abps, subARP, miss_match, time_stamp]
 # print(dict(zip(headers, features)))
 # print(features)
 
